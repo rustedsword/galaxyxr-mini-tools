@@ -1,0 +1,33 @@
+ARG SERIES=stonking
+
+# On a PC, arm64 comes from ports.ubuntu.com as a foreign architecture.
+FROM docker.io/library/ubuntu:${SERIES} AS base-amd64
+RUN codename=$(. /etc/os-release && echo "$VERSION_CODENAME") \
+ && sed -i '/^Types: deb$/a Architectures: amd64' /etc/apt/sources.list.d/ubuntu.sources \
+ && printf 'Types: deb\nURIs: http://ports.ubuntu.com/ubuntu-ports/\nSuites: %s %s-updates %s-security\nComponents: main universe\nArchitectures: arm64\nSigned-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg\n' \
+    "$codename" "$codename" "$codename" > /etc/apt/sources.list.d/ports.sources \
+ && dpkg --add-architecture arm64
+
+# On the headset, arm64 is native.
+FROM docker.io/library/ubuntu:${SERIES} AS base-arm64
+
+FROM base-$TARGETARCH
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+COPY control /src/debian/control
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    build-essential \
+    ca-certificates \
+    crossbuild-essential-arm64 \
+    devscripts \
+    gnupg2 \
+    libc6-dev:arm64 \
+    lintian \
+    pinentry-curses \
+    ubuntu-dev-tools \
+ && apt-get build-dep -y -a arm64 /src \
+ && rm -rf /var/lib/apt/lists/* /src
+
+CMD ["bash"]

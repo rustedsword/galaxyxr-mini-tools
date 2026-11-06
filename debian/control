@@ -1,0 +1,18 @@
+Source: galaxyxr-mini-tools
+Section: utils
+Priority: optional
+Maintainer: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+Build-Depends: cmake (>= 3.25), debhelper-compat (= 13)
+Rules-Requires-Root: no
+Standards-Version: 4.7.4
+Homepage: https://github.com/rustedsword/galaxyxr-mini-tools
+Vcs-Browser: https://github.com/rustedsword/galaxyxr-mini-tools
+Vcs-Git: https://github.com/rustedsword/galaxyxr-mini-tools.git
+
+Package: galaxyxr-mini-tools
+Architecture: arm64
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Small tools for the Samsung Galaxy XR
+ rpmb reads the UFS RPMB of the headset: its write counter or its data.
+ uefivars lists the UEFI variables in a dump of the RPMB or of the
+ uefivarstore partition.
