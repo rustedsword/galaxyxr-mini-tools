@@ -13,6 +13,10 @@ Package: galaxyxr-mini-tools
 Architecture: arm64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Small tools for the Samsung Galaxy XR
+ bdf_mac writes an ath12k board-2.bin for the WCN7850 with the factory MAC.
+ map_super maps logical partitions of Android's super with device-mapper.
+ panels_off switches off every active CRTC of the DRM devices.
  rpmb reads the UFS RPMB of the headset: its write counter or its data.
  uefivars lists the UEFI variables in a dump of the RPMB or of the
  uefivarstore partition.
+ unlock_data unlocks Android's encrypted /data with Samsung's KeyMint TA.
