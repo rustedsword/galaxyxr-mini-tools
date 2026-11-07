@@ -1,3 +1,14 @@
+galaxyxr-mini-tools (2~26.10.1) stonking; urgency=medium
+
+  * Create device-mapper names as symlinks to the kernel nodes, allowing
+    udev to take over mappings created before it starts.
+  * Mark resume events as device-mapper activations so udev also handles
+    mappings created on a running system without a vendor-specific rule.
+  * Atomically replace dangling mapper links and matching legacy block nodes
+    when creating a mapping, while preserving unrelated paths.
+
+ -- Stanislav Aleksandrov <lightofmysoul@gmail.com>  Sat, 07 Nov 2026 00:16:20 +0000
+
 galaxyxr-mini-tools (1~26.10.1) stonking; urgency=medium
 
   * Initial release.

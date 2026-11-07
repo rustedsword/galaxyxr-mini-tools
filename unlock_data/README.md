@@ -16,6 +16,7 @@ AES-GCM under `keymaster_key_blob`, its application id comes from
 
 - `metadata` maps DEVICE as `/dev/mapper/NAME` with `dm-default-key`
   (`aes-xts-plain64`, 4 KiB sectors); `-r` makes it read-only.
+  Requires devtmpfs mounted on `/dev`; udev is optional.
 - `fbe` adds the key to the filesystem at MOUNTPOINT and prints its
   identifier.
 
@@ -33,3 +34,5 @@ unlock_data $LEVELS fbe /data/unencrypted/key /data
 
 The DE keys of the users, `/data/misc/vold/user_keys/de/N`, go to
 `/data` the same way.
+
+Rebuild any initramfs containing `unlock_data` after updating the tool.
