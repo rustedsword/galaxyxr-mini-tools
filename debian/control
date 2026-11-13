@@ -2,7 +2,7 @@ Source: galaxyxr-mini-tools
 Section: utils
 Priority: optional
 Maintainer: Stanislav Aleksandrov <lightofmysoul@gmail.com>
-Build-Depends: cmake (>= 3.25), debhelper-compat (= 13)
+Build-Depends: cmake (>= 3.25), debhelper-compat (= 13), libxml2-dev
 Rules-Requires-Root: no
 Standards-Version: 4.7.4
 Homepage: https://github.com/rustedsword/galaxyxr-mini-tools
@@ -14,6 +14,8 @@ Architecture: arm64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Small tools for the Samsung Galaxy XR
  bdf_mac writes an ath12k board-2.bin for the WCN7850 with the factory MAC.
+ bt_nvm writes a Bluetooth NVM for the WCN7850 with Samsung's XML overrides
+ and the factory address.
  map_super maps logical partitions of Android's super with device-mapper.
  panels_off switches off every active CRTC of the DRM devices.
  rpmb reads the UFS RPMB of the headset: its write counter or its data.

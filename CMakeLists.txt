@@ -14,6 +14,7 @@ add_compile_options (-Wall -Wextra -Wpedantic -Wshadow -Wstrict-prototypes)
 
 add_subdirectory (lib)
 add_subdirectory (bdf_mac)
+add_subdirectory (bt_nvm)
 add_subdirectory (map_super)
 add_subdirectory (panels_off)
 add_subdirectory (rpmb)

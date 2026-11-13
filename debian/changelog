@@ -1,3 +1,10 @@
+galaxyxr-mini-tools (3~26.10.1) stonking; urgency=medium
+
+  * Add bt_nvm, which writes a Bluetooth NVM for the WCN7850 with the
+    overrides of Samsung's bt_nvm_loading.xml and the factory address.
+
+ -- Stanislav Aleksandrov <lightofmysoul@gmail.com>  Fri, 13 Nov 2026 10:14:48 +0000
+
 galaxyxr-mini-tools (2~26.10.1) stonking; urgency=medium
 
   * Create device-mapper names as symlinks to the kernel nodes, allowing
