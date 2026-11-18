@@ -134,6 +134,49 @@ load_table (int control, const char *name, const struct dm_target *targets, int 
   return result;
 }
 
+static int
+open_control (void)
+{
+  int  control;
+
+  mkdir ("/dev/mapper", 0755);
+  control = open (DM_CONTROL, O_RDWR | O_CLOEXEC);
+  if (control < 0) {
+    fprintf (stderr, "%s: open " DM_CONTROL ": %s\n", program_invocation_short_name, strerror (errno));
+  }
+
+  return control;
+}
+
+int
+dm_find (const char *name, dev_t *device, int *read_only)
+{
+  struct dm_ioctl  io;
+  int              control = open_control ();
+  int              result;
+
+  if (control < 0) {
+    return -1;
+  }
+
+  memset (&io, 0, sizeof (io));
+  io.data_size = sizeof (io);
+  result       = dm_ioctl (control, DM_DEV_STATUS, name, &io);
+  close (control);
+  if (result != 0) {
+    if (errno == ENXIO) {
+      return 0;
+    }
+
+    fprintf (stderr, "%s: DM_DEV_STATUS %s: %s\n", program_invocation_short_name, name, strerror (errno));
+    return -1;
+  }
+
+  *device    = io.dev;
+  *read_only = (io.flags & DM_READONLY_FLAG) != 0;
+  return 1;
+}
+
 int
 dm_create (const char *name, const struct dm_target *targets, int count, int read_only, dev_t *device)
 {
@@ -142,10 +185,8 @@ dm_create (const char *name, const struct dm_target *targets, int count, int rea
   int              control;
   int              error;
 
-  mkdir ("/dev/mapper", 0755);
-  control = open (DM_CONTROL, O_RDWR | O_CLOEXEC);
+  control = open_control ();
   if (control < 0) {
-    fprintf (stderr, "%s: open " DM_CONTROL ": %s\n", program_invocation_short_name, strerror (errno));
     return -1;
   }
 

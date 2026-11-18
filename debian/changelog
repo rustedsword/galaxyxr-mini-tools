@@ -1,3 +1,11 @@
+galaxyxr-mini-tools (4~26.10.1) stonking; urgency=medium
+
+  * Add mount_android_userdata, which mounts Android's encrypted /data on
+    its own: it reads KeyMint's levels from vbmeta, maps userdata with the
+    metadata encryption key and adds the file-based encryption keys.
+
+ -- Stanislav Aleksandrov <lightofmysoul@gmail.com>  Tue, 17 Nov 2026 22:53:10 +0000
+
 galaxyxr-mini-tools (3~26.10.1) stonking; urgency=medium
 
   * Add bt_nvm, which writes a Bluetooth NVM for the WCN7850 with the

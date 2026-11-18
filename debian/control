@@ -17,6 +17,7 @@ Description: Small tools for the Samsung Galaxy XR
  bt_nvm writes a Bluetooth NVM for the WCN7850 with Samsung's XML overrides
  and the factory address.
  map_super maps logical partitions of Android's super with device-mapper.
+ mount_android_userdata mounts Android's encrypted /data.
  panels_off switches off every active CRTC of the DRM devices.
  rpmb reads the UFS RPMB of the headset: its write counter or its data.
  uefivars lists the UEFI variables in a dump of the RPMB or of the
